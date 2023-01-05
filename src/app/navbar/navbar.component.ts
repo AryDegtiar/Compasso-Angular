@@ -1,5 +1,7 @@
 import { Router, RouterModule } from '@angular/router';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { LogInComponentService } from '../log-in/log-in-service/log-in-component.service';
+import { PanelProductoService } from '../servicios/service-panel-producto/panel-producto.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,12 +9,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   inicioActivo = true;
   inicioContacto = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private logInService: LogInComponentService, private panelService: PanelProductoService,
+    private cdr: ChangeDetectorRef) { }
+
+
+  ngOnInit(): void {
+    this.logInService.nuevaSesion.subscribe((data: any) => {
+      alert("hola soy el navbar: "+ data);
+      this.cdr.detectChanges();
+    });
+  }
 
   irInicio(){
     this.inicioActivo = true;
