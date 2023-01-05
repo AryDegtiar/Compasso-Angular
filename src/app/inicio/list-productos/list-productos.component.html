@@ -1,0 +1,50 @@
+    <!-- productos -->
+    <section id="productos">
+      <div class="container py-5">
+        <div class="row py-2">
+          <div class="col-12 ps-4">
+            <h1>Productos</h1>
+          </div>
+
+          <!-- CARDS -->
+          <div class="col-12">
+            <div class="row pb-2 pt-4 px-lg-10">
+
+              <div *ngFor="let producto of productos" class="col-12 col-md-6 col-lg-4 d-flex justify-content-center m-lg-0 py-4">
+                <div class="card" style="width: 18rem;">
+                  <img src="https://thumbs.dreamstime.com/z/imagem-de-fundo-bonita-do-c%C3%A9u-da-natureza-64743176.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title text-black">{{producto.nombre}}</h5>
+                    <p class="card-text text-black">{{producto.descripcion}}</p>
+                    <a href="#" class="btn btn-primary text-end me-2" target="_blank">Ficha Tecnica</a>
+                    <a href="https://wa.me/+541123191770?text=Hola,+estoy+interesado+en+uno+de+sus+productos." class="btn btn-success text-end" target="_blank">Consultar</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div *ngIf="mostrarPaginacion" class="d-flex align-items-center justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" (click)="previusPage()" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" >{{pageActual + 1}}</a></li>
+              <li class="page-item">
+                <a class="page-link" (click)="nextPage()" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+    </section>
