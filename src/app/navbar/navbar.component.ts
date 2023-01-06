@@ -14,13 +14,19 @@ export class NavbarComponent implements OnInit {
   inicioActivo = true;
   inicioContacto = false;
 
+  navbarAdmin = false;
+
   constructor(private router: Router, private logInService: LogInComponentService, private panelService: PanelProductoService,
     private cdr: ChangeDetectorRef) { }
 
 
   ngOnInit(): void {
-    this.logInService.nuevaSesion.subscribe((data: any) => {
-      alert("hola soy el navbar: "+ data);
+    this.logInService.getLogeo().subscribe((data: any) => {
+      if(data != null){
+        this.navbarAdmin = true;
+      }else{
+        this.navbarAdmin = false;
+      }
       this.cdr.detectChanges();
     });
   }
@@ -35,6 +41,11 @@ export class NavbarComponent implements OnInit {
     this.inicioActivo = false;
     this.inicioContacto = true;
     this.router.navigate(['contacto']);
+  }
+
+  logOut(){
+    this.logInService.cerrarSesion();
+    this.router.navigate(['']);
   }
 
 }

@@ -22,15 +22,18 @@ export class LogInComponent implements OnInit {
       contrasenia: datosLogIn.target[1].value
     }
 
-    this.loginComponentService.buscarUsuario(usu).subscribe((usu: any) => {
+    this.loginComponentService.buscarUsuario(usu).subscribe((usuario: any) => {
 
-      if(usu != null){
+      if(usuario != null){
 
-        this.loginComponentService.notificar();
+        //this.loginComponentService.nuevaSesion.emit(usuario);
+        this.loginComponentService.setLogeo(usuario);
         this.router.navigate(['administrar/productos']);
 
       }
 
+    }, (error) => {
+      alert("Usuario o contraseña incorrectos");
     });
 
   }

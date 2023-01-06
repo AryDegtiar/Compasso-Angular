@@ -5,7 +5,7 @@ import { CRUDProductoRoutingModule } from './crud-producto-routing.module';
 import { PanelProductosComponent } from './panel-productos/panel-productos.component';
 import { ModificarComponent } from './modificar/modificar.component';
 import { CrearComponent } from './crear/crear.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +15,7 @@ import { CrearComponent } from './crear/crear.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     CRUDProductoRoutingModule
   ]
 })

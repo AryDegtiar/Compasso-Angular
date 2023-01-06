@@ -6,8 +6,9 @@ import { PanelProductosComponent } from './panel-productos/panel-productos.compo
 
 const routes: Routes = [
   { path: '', component: PanelProductosComponent },
-  { path: 'modificar/:id', component: ModificarComponent },
+  { path: 'modificar/:idProducto', component: ModificarComponent },
   { path: 'crear', component: CrearComponent},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
