@@ -12,13 +12,16 @@ import { PanelProductoService } from 'src/app/servicios/service-panel-producto/p
 export class CrearComponent implements OnInit {
 
   usuarioID: any;
+  productoID: any;
 
   producto = {
     nombre: "",
     descripcion: "",
     fichaTecnica: "",
-    imagen: ""
+//    imagen: ""
   }
+
+  archivos: any = [];
 
   constructor(private router: Router, private logInService: LogInComponentService,
     private cdr: ChangeDetectorRef, private panelService: PanelProductoService) { }
@@ -32,19 +35,38 @@ export class CrearComponent implements OnInit {
   }
 
   crearProducto(){
-    if(this.producto.nombre === "" || this.producto.descripcion === "" || this.producto.fichaTecnica === "" || this.producto.imagen === ""){
+    if(this.producto.nombre === "" || this.producto.descripcion === "" || this.producto.fichaTecnica === "" || this.archivos.length === 0){
       alert("Por favor, rellene todos los campos");
       return;
     }else{
       this.panelService.crearProducto(this.producto, this.usuarioID).subscribe((data: any) => {
-        console.log(data);
+        this.productoID = data.id;
+
+        this.subirImagen(data);
+
         this.panelService.notificarProducto(data);
         this.cdr.detectChanges();
+
+        this.router.navigate(['/administrar/productos']);
       });
-
-      this.router.navigate(['administrar/productos']);
     }
+  }
 
+  subirImagen(prodCreado: any){
+    const formData = new FormData();
+    this.archivos.forEach((archivo: any) => {
+      formData.append('file', archivo);
+    });
+
+    this.panelService.subirImagen(prodCreado.id, this.usuarioID, formData).subscribe((data: any) => {
+      console.log(data);
+      this.cdr.detectChanges();
+    });
+  }
+
+  capturarFile(event:any){
+    const archivoCapturado = event.target.files[0];
+    this.archivos.push(archivoCapturado);
   }
 
 }

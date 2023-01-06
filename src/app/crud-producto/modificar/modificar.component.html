@@ -15,9 +15,15 @@
           <label class="form-label">Url ficha tecnica</label>
           <input type="text" [(ngModel)]="producto.fichaTecnica" class="form-control" id="exampleInputEmail1" placeholder="{{producto.fichaTecnica}}">
         </div>
+        <!--
         <div class="mb-3">
           <label class="form-label">Url imagen</label>
           <input type="text" [(ngModel)]="producto.imagen" class="form-control" id="exampleInputEmail1" placeholder="{{producto.imagen}}">
+        </div>
+        -->
+        <div class="mb-4">
+          <label class="form-label w-100">Imagen</label>
+          <input type="file" (change)="capturarFile($event)" class="rounded">
         </div>
         <button type="submit" class="btn btn-secondary me-4" routerLink="/administrar/productos">Cancelar</button>
         <button type="submit" (click)="modificarProducto()" class="btn btn-warning">Modificar</button>

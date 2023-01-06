@@ -41,4 +41,8 @@ export class PanelProductoService {
     this.productoEmiter.emit(producto);
   }
 
+  subirImagen(productoID:any, usuarioID:any,formData: FormData) {
+    return this.http.post('http://localhost:8081/administradores/' + usuarioID + '/productos/' + productoID + '/imagen', formData);
+  }
+
 }
