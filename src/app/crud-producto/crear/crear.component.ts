@@ -11,6 +11,8 @@ import { PanelProductoService } from 'src/app/servicios/service-panel-producto/p
 })
 export class CrearComponent implements OnInit {
 
+  maxTamanioImagen = 15000000; // 15 mb
+
   usuarioID: any;
   productoID: any;
 
@@ -65,8 +67,13 @@ export class CrearComponent implements OnInit {
   }
 
   capturarFile(event:any){
-    const archivoCapturado = event.target.files[0];
-    this.archivos.push(archivoCapturado);
+    if(event.target.files[0].size < this.maxTamanioImagen){
+      const archivoCapturado = event.target.files[0];
+      this.archivos.push(archivoCapturado);
+    }else{
+      event.target.value = "";
+      alert("El archivo es demasiado grande");
+    }
   }
 
 }

@@ -12,6 +12,8 @@ import { ServiceProductoComponentService } from 'src/app/servicios/service-produ
 })
 export class ModificarComponent implements OnInit{
 
+  maxTamanioImagen = 15000000; // 15 mb
+
   usuarioID: any;
   productoID: any;
 
@@ -63,8 +65,13 @@ export class ModificarComponent implements OnInit{
   }
 
   capturarFile(event:any){
-    const archivoCapturado = event.target.files[0];
-    this.archivos.push(archivoCapturado);
+    if(event.target.files[0].size < this.maxTamanioImagen){
+      const archivoCapturado = event.target.files[0];
+      this.archivos.push(archivoCapturado);
+    }else{
+      event.target.value = "";
+      alert("El archivo es demasiado grande");
+    }
   }
 
   subirImagen(prodCreado: any){
