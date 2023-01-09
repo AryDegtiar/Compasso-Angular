@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { Router } from '@angular/router';
 import { LogInComponentService } from 'src/app/log-in/log-in-service/log-in-component.service';
 import { PanelProductoService } from 'src/app/servicios/service-panel-producto/panel-producto.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear',
@@ -29,6 +30,9 @@ export class CrearComponent implements OnInit {
     private cdr: ChangeDetectorRef, private panelService: PanelProductoService) { }
 
   ngOnInit(): void {
+    var AOS = require('aos');
+    AOS.init();
+
     this.logInService.getLogeo().subscribe((data: any) => {
       this.usuarioID = data;
       this.cdr.detectChanges();
@@ -38,7 +42,11 @@ export class CrearComponent implements OnInit {
 
   crearProducto(){
     if(this.producto.nombre === "" || this.producto.descripcion === "" || this.producto.fichaTecnica === "" || this.archivos.length === 0){
-      alert("Por favor, rellene todos los campos");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Por favor, rellene todos los campos'
+      });
       return;
     }else{
       this.panelService.crearProducto(this.producto, this.usuarioID).subscribe((data: any) => {
@@ -72,7 +80,11 @@ export class CrearComponent implements OnInit {
       this.archivos.push(archivoCapturado);
     }else{
       event.target.value = "";
-      alert("El archivo es demasiado grande");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El archivo es demasiado grande'
+      });
     }
   }
 

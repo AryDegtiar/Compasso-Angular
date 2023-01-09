@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { LogInComponentService } from './log-in-service/log-in-component.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class LogInComponent implements OnInit {
   constructor(private loginComponentService: LogInComponentService, private router: Router,private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    var AOS = require('aos');
+    AOS.init();
   }
 
   logIn(datosLogIn:any){
@@ -33,7 +36,11 @@ export class LogInComponent implements OnInit {
       }
 
     }, (error) => {
-      alert("Usuario o contraseña incorrectos");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Usuario o contraseña incorrectos'
+      });
     });
 
   }

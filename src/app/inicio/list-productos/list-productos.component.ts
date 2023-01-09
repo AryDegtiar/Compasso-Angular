@@ -21,6 +21,9 @@ export class ListProductosComponent implements OnInit{
   }
 
   getProductos(page: any) {
+    var AOS = require('aos');
+    AOS.init();
+
     this.serviceProducto.getProductos(page).subscribe((data: any) => {
         console.log(data);
 

@@ -20,6 +20,8 @@ export class PanelProductosComponent implements OnInit {
     private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    var AOS = require('aos');
+    AOS.init();
 
     this.logInService.getLogeo().subscribe((data: any) => {
       this.usuarioID = data;

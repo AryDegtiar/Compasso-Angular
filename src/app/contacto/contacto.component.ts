@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-contacto',
@@ -6,6 +6,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./contacto.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactoComponent {
+export class ContactoComponent implements OnInit{
+
+  constructor() { }
+
+  ngOnInit(): void {
+    var AOS = require('aos');
+    AOS.init();
+  }
 
 }

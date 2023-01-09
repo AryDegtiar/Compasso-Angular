@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LogInComponentService } from 'src/app/log-in/log-in-service/log-in-component.service';
 import { PanelProductoService } from 'src/app/servicios/service-panel-producto/panel-producto.service';
 import { ServiceProductoComponentService } from 'src/app/servicios/service-producto/service-producto-component.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modificar',
@@ -31,6 +32,9 @@ export class ModificarComponent implements OnInit{
     private router: Router, private rutaActiva: ActivatedRoute) {}
 
   ngOnInit(): void {
+    var AOS = require('aos');
+    AOS.init();
+
     this.logInService.getLogeo().subscribe((data: any) => {
       this.usuarioID = data;
       this.cdr.detectChanges();
@@ -46,7 +50,11 @@ export class ModificarComponent implements OnInit{
 
   modificarProducto(){
     if(this.producto.nombre === "" && this.producto.descripcion === "" && this.producto.fichaTecnica === "" && this.archivos.length === 0){
-      alert("Por favor, rellene al menos un campo");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Por favor, rellene al menos un campo'
+      });
       return;
     }else{
       this.panelService.modificarProducto(this.productoID, this.usuarioID, this.producto).subscribe((data: any) => {
@@ -70,7 +78,11 @@ export class ModificarComponent implements OnInit{
       this.archivos.push(archivoCapturado);
     }else{
       event.target.value = "";
-      alert("El archivo es demasiado grande");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El archivo es demasiado grande'
+      });
     }
   }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-presentacion',
@@ -6,6 +6,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./presentacion.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PresentacionComponent {
+export class PresentacionComponent implements OnInit{
+
+    constructor() { }
+
+    ngOnInit() {
+      var AOS = require('aos');
+      AOS.init();
+    }
 
 }

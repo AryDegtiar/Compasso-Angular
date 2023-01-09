@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LogInComponentService {
 
+  private url = "http://compasso-java-production.up.railway.app";
+
   usuarioID?: any;
 
   logeo$ = new BehaviorSubject<any>(this.usuarioID);
@@ -26,7 +28,7 @@ export class LogInComponentService {
   }
 
   buscarUsuario(usu: any){
-    return this.http.post('http://localhost:8081/administradores/login', usu);
+    return this.http.post(this.url + '/administradores/login', usu);
   }
 
 }

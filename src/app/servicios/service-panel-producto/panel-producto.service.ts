@@ -6,35 +6,37 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class PanelProductoService {
 
+  private url = "http://compasso-java-production.up.railway.app";
+
   productoEmiter = new EventEmitter<any>();
 
   constructor(private http: HttpClient) { }
 
   getProductos(usuarioID: any) {
-    return this.http.get('http://localhost:8081/administradores/' + usuarioID + '/productos');
+    return this.http.get(this.url + '/administradors/' + usuarioID + '/productos');
   }
 
   getProducto(productoID: any, usuarioID: any) {
-    return this.http.get('http://localhost:8081/administradores/' + usuarioID + '/productos/' + productoID);
+    return this.http.get(this.url + '/administradors/' + usuarioID + '/productos/' + productoID);
   }
 
   crearProducto(producto: any, usuarioID: any) {
-    return this.http.post('http://localhost:8081/administradores/' + usuarioID + '/productos', producto);
+    return this.http.post(this.url + '/administradors/' + usuarioID + '/productos', producto);
   }
 
   eliminarProducto(productoID: any, usuarioID: any) {
-    return this.http.delete('http://localhost:8081/administradores/' + usuarioID + '/productos/' + productoID);
+    return this.http.delete(this.url + '/administradors/' + usuarioID + '/productos/' + productoID);
   }
 
   recuperarProducto(productoID: any, usuarioID: any) {
     let recuperar = {
       "activo": true
     }
-    return this.http.patch('http://localhost:8081/administradores/' + usuarioID + '/productos/' + productoID, recuperar);
+    return this.http.patch(this.url + '/administradors/' + usuarioID + '/productos/' + productoID, recuperar);
   }
 
   modificarProducto(productoID: any, usuarioID: any, productoModificado: any) {
-    return this.http.patch('http://localhost:8081/administradores/' + usuarioID + '/productos/' + productoID, productoModificado);
+    return this.http.patch(this.url + '/administradors/' + usuarioID + '/productos/' + productoID, productoModificado);
   }
 
   notificarProducto(producto: any) {
@@ -42,7 +44,7 @@ export class PanelProductoService {
   }
 
   subirImagen(productoID:any, usuarioID:any,formData: FormData) {
-    return this.http.post('http://localhost:8081/administradores/' + usuarioID + '/productos/' + productoID + '/imagen', formData);
+    return this.http.post(this.url + '/administradors/' + usuarioID + '/productos/' + productoID + '/imagen', formData);
   }
 
 }
