@@ -6,10 +6,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServiceProductoComponentService {
 
+  private url = "http://compasso-java-production.up.railway.app";
+
   constructor(private http: HttpClient) { }
 
   getProductos(pageActual: any) {
-    return this.http.get('http://localhost:8081/productos?activo=true&page=' + pageActual);
+    return this.http.get(this.url + '/productos?activo=true&page=' + pageActual);
   }
 
 }
