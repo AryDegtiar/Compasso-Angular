@@ -22,6 +22,10 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.inicioActivo = true;
+    this.inicioContacto = false;
+    this.logIn = false;
+
     this.logInService.getLogeo().subscribe((data: any) => {
       if(data != null){
         this.navbarAdmin = true;
@@ -36,6 +40,7 @@ export class NavbarComponent implements OnInit {
     this.inicioActivo = true;
     this.inicioContacto = false;
     this.logIn = false;
+    this.logOut();
     this.router.navigate(['inicio']);
   }
 
