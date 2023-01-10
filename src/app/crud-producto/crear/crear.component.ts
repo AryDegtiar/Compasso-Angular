@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class CrearComponent implements OnInit {
 
+  btnCrear = true;
+
   maxTamanioImagen = 15000000; // 15 mb
 
   usuarioID: any;
@@ -41,6 +43,7 @@ export class CrearComponent implements OnInit {
   }
 
   crearProducto(){
+    this.btnCrear = false;
     if(this.producto.nombre === "" || this.producto.descripcion === "" || this.producto.fichaTecnica === "" || this.archivos.length === 0){
       Swal.fire({
         icon: 'error',
@@ -56,10 +59,10 @@ export class CrearComponent implements OnInit {
 
         this.panelService.notificarProducto(data);
         this.cdr.detectChanges();
-
-        this.router.navigate(['/administrar/productos']);
       });
     }
+    this.btnCrear = true;
+    this.router.navigate(['/administrar/productos']);
   }
 
   subirImagen(prodCreado: any){

@@ -26,7 +26,8 @@
           <input type="file" (change)="capturarFile($event)" class="rounded">
         </div>
         <button type="submit" class="btn btn-secondary me-4" routerLink="/administrar/productos">Cancelar</button>
-        <button type="submit" class="btn btn-success" (click)="crearProducto()">Generar</button>
+        <button *ngIf="btnCrear" type="submit" class="btn btn-success" (click)="crearProducto()">Generar</button>
+        <button *ngIf="!btnCrear" type="submit" class="btn btn-warning dissabled" disabled>Cargando...</button>
       </div>
   </div>
 </section>

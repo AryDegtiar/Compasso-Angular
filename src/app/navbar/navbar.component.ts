@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
 
   inicioActivo = true;
   inicioContacto = false;
+  logIn = false;
 
   navbarAdmin = false;
 
@@ -34,13 +35,22 @@ export class NavbarComponent implements OnInit {
   irInicio(){
     this.inicioActivo = true;
     this.inicioContacto = false;
+    this.logIn = false;
     this.router.navigate(['inicio']);
   }
 
   irContacto(){
     this.inicioActivo = false;
+    this.logIn = false;
     this.inicioContacto = true;
     this.router.navigate(['contacto']);
+  }
+
+  irLogIn(){
+    this.inicioActivo = false;
+    this.inicioContacto = false;
+    this.logIn = true;
+    this.router.navigate(['login']);
   }
 
   logOut(){

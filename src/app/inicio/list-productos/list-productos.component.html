@@ -12,7 +12,7 @@
 
               <div *ngFor="let producto of productos" class="col-12 col-md-6 col-lg-4 d-flex justify-content-center m-lg-0 py-4">
                 <div class="card" style="width: 18rem;">
-                  <img src="http://localhost:8081{{producto.imagen}}" class="card-img-top" alt="..." style="height:220px; object-fit: cover;">
+                  <img src="http://compasso-java-production.up.railway.app{{producto.imagen}}" class="card-img-top" alt="..." style="height:220px; object-fit: cover;">
                   <div class="card-body">
                     <h5 class="card-title text-black">{{producto.nombre}}</h5>
                     <p class="card-text text-black">{{producto.descripcion}}</p>

@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class ModificarComponent implements OnInit{
 
+  btnModificar = true;
+
   maxTamanioImagen = 15000000; // 15 mb
 
   usuarioID: any;
@@ -49,6 +51,7 @@ export class ModificarComponent implements OnInit{
   }
 
   modificarProducto(){
+    this.btnModificar = false;
     if(this.producto.nombre === "" && this.producto.descripcion === "" && this.producto.fichaTecnica === "" && this.archivos.length === 0){
       Swal.fire({
         icon: 'error',
@@ -62,14 +65,16 @@ export class ModificarComponent implements OnInit{
 
         if(this.archivos.length > 0){
           this.subirImagen(data);
+          console.log("ir a subir imagen");
+          console.log(data);
         }
 
         this.panelService.notificarProducto(data);
         this.cdr.detectChanges();
       });
-
-      this.router.navigate(['administrar/productos']);
     }
+    this.btnModificar = true;
+    this.router.navigate(['administrar/productos']);
   }
 
   capturarFile(event:any){
@@ -91,11 +96,15 @@ export class ModificarComponent implements OnInit{
     this.archivos.forEach((archivo: any) => {
       formData.append('file', archivo);
     });
+    console.log("subir imagen form data");
+    console.log(formData);
 
     this.panelService.subirImagen(prodCreado.id, this.usuarioID, formData).subscribe((data: any) => {
+      console.log("devolucion del service subir imagen");
       console.log(data);
       this.cdr.detectChanges();
     });
+
   }
 
 }
